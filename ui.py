@@ -50,6 +50,7 @@ def print_table(table, title_list):
             print(total * "-")
     print("\\" + (total-2) * "-" + "/")
 
+
 # This function needs to print result of the special functions
 #
 # @result: string or list or dictionary - result of the special function
@@ -57,6 +58,7 @@ def print_table(table, title_list):
 def print_result(result, label):
     print(label + ": ")
     print(result)
+
 
 # This function needs to generate outputs like this:
 # Main menu:
@@ -71,8 +73,6 @@ def print_result(result, label):
 # @title: string - title of the menu
 # @list_options: list of strings - the options in the menu
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
-
-
 def print_menu(title, list_options, exit_message):
     print(title)
     num = 1

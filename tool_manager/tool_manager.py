@@ -33,11 +33,11 @@ def start_module():
 # print the default table of records from the file
 #
 # @table: list of lists
-def show_table(table):
+def show_table(table = data_manager.get_table_from_file("tool_manager/tools.csv")):
+    title_list = ["id", "name", "manufacturer", "purchase_date", "durability"]
+    return ui.print_table(table, title_list)
 
-    # your code
-
-    pass
+show_table(table = data_manager.get_table_from_file("tool_manager/tools.csv"))
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
