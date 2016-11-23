@@ -57,8 +57,10 @@ def print_menu(title, list_options, exit_message):
 # @inputs: list of string - list of the received values from the user
 def get_inputs(list_labels, title):
     inputs = []
-
-    # your code
+    print(title)
+    key = input((list_labels))
+    for element in key:
+        inputs.append(element)
 
     return inputs
 
@@ -67,7 +69,4 @@ def get_inputs(list_labels, title):
 #
 # @message: string - the error message
 def print_error_message(message):
-
-    # your code
-
-    pass
+    print("A(n) " + message + "has occured!")
