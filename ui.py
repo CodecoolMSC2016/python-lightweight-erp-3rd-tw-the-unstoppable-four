@@ -12,11 +12,43 @@
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
 def print_table(table, title_list):
-
-    # your code
-
-    pass
-
+    extended_table = table
+    extended_table.insert(0, title_list)
+    length_list = []
+    for k in range(len(title_list)):
+        length_list.append(0)
+    for i in range(len(extended_table[0])):
+        for j in range(len(extended_table)):
+            if len(extended_table[j][i]) > length_list[i]:
+                length_list[i] = len(extended_table[j][i])
+    new_list = []
+    for t in range(len(extended_table)):
+        sub_list = []
+        new_list.append(sub_list)
+    for s in range(len(extended_table[0])):
+        for r in range(len(extended_table)):
+            this_string = extended_table[r][s]
+            if len(this_string) != length_list[s]:
+                difference = length_list[s] - len(extended_table[r][s])
+                if difference % 2 == 1:
+                    this_string = " "*int(difference/2) + this_string + " "*int(difference/2 + 1)
+                    new_list[r].append(this_string)
+                else:
+                    this_string = " "*int(difference/2) + this_string + " "*int(difference/2)
+                    new_list[r].append(this_string)
+            else:
+                new_list[r].append(this_string)
+    lenght_of_titles = len(extended_table[0]) * "| {} |"
+    total = 0
+    for i in length_list:
+        total += i
+    total += len(extended_table[0])*4
+    print("/" + (total-2) * "-" + "\\")
+    for i in range(len(new_list)):
+        print(lenght_of_titles.format(*new_list[i]))
+        if i < len(new_list)-1:
+            print(total * "-")
+    print("\\" + (total-2) * "-" + "/")
 
 # This function needs to print result of the special functions
 #
