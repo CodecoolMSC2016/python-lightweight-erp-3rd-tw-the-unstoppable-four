@@ -1,7 +1,7 @@
 # implement commonly used functions here
 
+import string
 import random
-
 
 # generate and return a unique and random string
 # other expectation:
@@ -12,8 +12,18 @@ import random
 # @generated: string - generated random string (unique in the @table)
 def generate_random(table):
 
-    generated = ''
+    spec_char = ("!", "\"", "#", "$", "%", "&", "\'", "(", ")", "*",
+                "+", ",", "-", ".", "/", ":", "<", ">", "=", "?")
 
-    # your code
+    id = []
 
+    for i in range(2):
+        id.append(random.choice(string.ascii_uppercase))
+        id.append(random.choice(string.ascii_lowercase))
+        id.append(random.choice(string.digits))
+        id.append(random.choice(spec_char))
+    generated = ""
+
+    for i in range(len(id)):
+        generated += id[i]
     return generated
