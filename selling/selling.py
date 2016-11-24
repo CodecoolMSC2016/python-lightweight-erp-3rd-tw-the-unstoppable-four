@@ -25,6 +25,9 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # user need to go back to the main menu from here
 # we need to reach the default and the special functions of this module from the module menu
 #
+
+CSV_NAME = "selling/sellings.csv"
+
 def start_module():
 
     # you code
@@ -39,7 +42,7 @@ def show_table(table = data_manager.get_table_from_file("selling/sellings.csv"))
     title_list = ["id", "title", "price", "month", "day", "year"]
     return ui.print_table(table, title_list)
 
-show_table(table = data_manager.get_table_from_file("selling/sellings.csv"))
+#show_table(table = data_manager.get_table_from_file("selling/sellings.csv"))
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
@@ -56,11 +59,19 @@ def add(table):
 #
 # @table: list of lists
 # @id_: string
-def remove(table, id_):
-
-    # your code
-
+def remove(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
+    counter = 0
+    if id_ == None:
+        id_ = ui.get_inputs("Enter id: ", "")
+    for i in table:
+        if id_[0] in i:
+            break
+        counter += 1
+    del table[counter]
+    data_manager.write_table_to_file(CSV_NAME, table)
     return table
+
+#remove()
 
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -68,11 +79,23 @@ def remove(table, id_):
 #
 # @table: list of lists
 # @id_: string
-def update(table, id_):
-
-    # your code
-
+def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
+    counter = 0
+    if id_ == None:
+        id_ = ui.get_inputs("Enter id: ", "")
+    title_list = ["id", "title", "price", "month", "day", "year"]
+    for i in table:
+        if id_[0] in i:
+            break
+        counter += 1
+    new_counter = 1
+    for j in range(1, len(table[0])):
+        inp = ui.get_inputs("Enter " + title_list[new_counter] + ": ", "")
+        table[counter][new_counter] = inp[0]
+        new_counter += 1
+    data_manager.write_table_to_file(CSV_NAME, table)
     return table
+#update()
 
 
 # special functions:
