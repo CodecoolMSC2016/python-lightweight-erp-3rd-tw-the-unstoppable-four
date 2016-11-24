@@ -30,27 +30,27 @@ CSV_NAME = "selling/sellings.csv"
 
 def start_module():
     menu_point = ["Show table", "Add", "Remove", "Update", "Lowest price", "Items sold between a period"]
-    ui.print_menu("Selling manager", menu_point, "Return to the main menu")
+    ui.print_menu("\nSelling manager", menu_point, "Return to the main menu")
     choose()
 
 
 def choose():
-    inputs = ui.get_inputs(["Please enter a number: "], "Selling manager")
+    inputs = ui.get_inputs(["Please enter a number: "], "\nSelling manager")
     option = inputs[0]
 
     if option == "1":
-        show_table(table=data_manager.get_table_from_file("CSV_NAME"))
+        show_table(table=data_manager.get_table_from_file(CSV_NAME))
     elif option == "2":
-        add(data_manager.get_table_from_file("CSV_NAME"))
+        add(data_manager.get_table_from_file(CSV_NAME))
     elif option == "3":
         my_id = ui.get_inputs("Enter the id of the line you want to delete: ", "")
-        remove(data_manager.get_table_from_file("CSV_NAME"), my_id)
+        remove(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "4":
         my_id = ui.get_inputs("Enter the id of the line you want to update: ", "")
-        update(data_manager.get_table_from_file("CSV_NAME"), my_id)
+        update(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "5":
         ui.print_result(get_lowest_price_item_id(data_manager.get_table_from_file(
-            "CSV_NAME")), "Lowest price item: ")
+            CSV_NAME)), "Lowest price item: ")
     elif option == "6":
         month_from = ui.get_inputs("Enter the year you want to inspect: ", "")
         day_from = ui.get_inputs("Enter the year you want to inspect: ", "")
@@ -59,7 +59,7 @@ def choose():
         day_to = ui.get_inputs("Enter the year you want to inspect: ", "")
         year_to = ui.get_inputs("Enter the year you want to inspect: ", "")
         ui.print_result(get_items_sold_between(data_manager.get_table_from_file(
-            "CSV_NAME"), month_from[0], day_from[0], year_from[0], month_to[0], day_to[0], year_to[0]), "Item: ")
+            CSV_NAME), month_from[0], day_from[0], year_from[0], month_to[0], day_to[0], year_to[0]), "Item: ")
     elif option == "0":
         pass
 

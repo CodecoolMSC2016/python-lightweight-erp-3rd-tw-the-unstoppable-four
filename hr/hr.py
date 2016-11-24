@@ -26,30 +26,30 @@ CSV_NAME = "hr/persons.csv"
 
 def start_module():
     menu_point = ["Show table", "Add", "Remove", "Update", "Oldest person", "Closest person to average age"]
-    ui.print_menu("Human resources manager", menu_point, "Return to the main menu")
+    ui.print_menu("\nHuman resources manager", menu_point, "Return to the main menu")
     choose()
 
 
 def choose():
-    inputs = ui.get_inputs(["Please enter a number: "], "Human resources manager")
+    inputs = ui.get_inputs(["Please enter a number: "], "\nHuman resources manager")
     option = inputs[0]
 
     if option == "1":
-        show_table(table=data_manager.get_table_from_file("CSV_NAME"))
+        show_table(table=data_manager.get_table_from_file(CSV_NAME))
     elif option == "2":
-        add(data_manager.get_table_from_file("CSV_NAME"))
+        add(data_manager.get_table_from_file(CSV_NAME))
     elif option == "3":
         my_id = ui.get_inputs("Enter the id of the line you want to delete: ", "")
-        remove(data_manager.get_table_from_file("CSV_NAME"), my_id)
+        remove(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "4":
         my_id = ui.get_inputs("Enter the id of the line you want to update: ", "")
-        update(data_manager.get_table_from_file("CSV_NAME"), my_id)
+        update(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "5":
         ui.print_result(get_oldest_person(data_manager.get_table_from_file(
-            "CSV_NAME")), "Oldest person: ")
+            CSV_NAME)), "Oldest person: ")
     elif option == "6":
         ui.print_result(get_persons_closest_to_average(data_manager.get_table_from_file(
-            "CSV_NAME")), "Name: ")
+            CSV_NAME)), "Name: ")
     elif option == "0":
         pass
 

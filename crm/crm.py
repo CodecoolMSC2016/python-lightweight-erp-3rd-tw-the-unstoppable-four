@@ -27,30 +27,30 @@ CSV_NAME = "crm/customers.csv"
 
 def start_module():
     menu_point = ["Show table", "Add", "Remove", "Update", "Longest customer name", "Subscribed emails"]
-    ui.print_menu("Customer Relationship Management (CRM)", menu_point, "Return to the main menu")
+    ui.print_menu("\nCustomer Relationship Management (CRM)", menu_point, "Return to the main menu")
     choose()
 
 
 def choose():
-    inputs = ui.get_inputs(["Please enter a number: "], "Customer Relationship Management (CRM)")
+    inputs = ui.get_inputs(["Please enter a number: "], "\nCustomer Relationship Management (CRM)")
     option = inputs[0]
 
     if option == "1":
-        show_table(table=data_manager.get_table_from_file("CSV_NAME"))
+        show_table(table=data_manager.get_table_from_file(CSV_NAME))
     elif option == "2":
-        add(data_manager.get_table_from_file("CSV_NAME"))
+        add(data_manager.get_table_from_file(CSV_NAME))
     elif option == "3":
         my_id = ui.get_inputs("Enter the id of the line you want to delete: ", "")
-        remove(data_manager.get_table_from_file("CSV_NAME"), my_id)
+        remove(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "4":
         my_id = ui.get_inputs("Enter the id of the line you want to update: ", "")
-        update(data_manager.get_table_from_file("CSV_NAME"), my_id)
+        update(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "5":
         ui.print_result(get_longest_name_id(data_manager.get_table_from_file(
-            "CSV_NAME")), "Longest name: ")
+            CSV_NAME)), "Longest name: ")
     elif option == "6":
         ui.print_result(get_subscribed_emails(data_manager.get_table_from_file(
-            "CSV_NAME")), "Subscribed emails: ")
+            CSV_NAME)), "Subscribed emails: ")
     elif option == "0":
         pass
 

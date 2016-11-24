@@ -28,31 +28,31 @@ CSV_NAME = "store/games.csv"
 
 def start_module():
     menu_point = ["Show table", "Add", "Remove", "Update", "Games by manufacturer", "Average games in stock from manufacturer"]
-    ui.print_menu("Store manager", menu_point, "Return to the main menu")
+    ui.print_menu("\nStore manager", menu_point, "Return to the main menu")
     choose()
 
 
 def choose():
-    inputs = ui.get_inputs(["Please enter a number: "], "Store manager")
+    inputs = ui.get_inputs(["Please enter a number: "], "\nStore manager")
     option = inputs[0]
 
     if option == "1":
-        show_table(table=data_manager.get_table_from_file("CSV_NAME"))
+        show_table(table=data_manager.get_table_from_file(CSV_NAME))
     elif option == "2":
-        add(data_manager.get_table_from_file("CSV_NAME"))
+        add(data_manager.get_table_from_file(CSV_NAME))
     elif option == "3":
         my_id = ui.get_inputs("Enter the id of the line you want to delete: ", "")
-        remove(data_manager.get_table_from_file("CSV_NAME"), my_id)
+        remove(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "4":
         my_id = ui.get_inputs("Enter the id of the line you want to update: ", "")
-        update(data_manager.get_table_from_file("CSV_NAME"), my_id)
+        update(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "5":
         ui.print_result(get_counts_by_manufacturers(data_manager.get_table_from_file(
-            "CSV_NAME")), "Games by manufacturer: ")
+            CSV_NAME)), "Games by manufacturer: ")
     elif option == "6":
         manufacturer = ui.get_inputs("Enter the manufacturer: ", "")
         ui.print_result(get_average_by_manufacturer(data_manager.get_table_from_file(
-            "CSV_NAME"), manufacturer[0]), "Average games in stock from manufacturer: ")
+            CSV_NAME), manufacturer[0]), "Average games in stock from manufacturer: ")
     elif option == "0":
         pass
 
@@ -60,7 +60,7 @@ def choose():
 # print the default table of records from the file
 #
 # @table: list of lists
-def show_table(table=data_manager.get_table_from_file("store/games.csv")):
+def show_table(table=data_manager.get_table_from_file(CSV_NAME)):
     title_list = ["id", "title", "manufacturer", "price", "in_stock"]
     return ui.print_table(table, title_list)
 
@@ -69,7 +69,7 @@ def show_table(table=data_manager.get_table_from_file("store/games.csv")):
 #
 # @table: list of lists
 def add(table):
-    info = data_manager.get_table_from_file("store/games.csv")
+    info = data_manager.get_table_from_file(CSV_NAME)
     random = common.generate_random(info)
     title_list = ["id", "title", "manufacturer", "price", "in_stock"]
     counter = 1
@@ -80,7 +80,7 @@ def add(table):
         newdata.append(inp[0])
         counter += 1
     info.append(newdata)
-    data_manager.write_table_to_file("store/games.csv", info)
+    data_manager.write_table_to_file(CSV_NAME, info)
     return table
 
 
