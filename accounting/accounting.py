@@ -128,11 +128,35 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
 
 # the question: Which year has the highest profit? (profit=in-out)
 # return the answer (number)
-def which_year_max(table):
+def which_year_max(table=data_manager.get_table_from_file("accounting/items.csv")):
 
-    # your code
+    lista = data_manager.get_table_from_file("accounting/items.csv")
 
-    pass
+    d_lista = {}
+
+    for i in range(len(lista)):
+        if lista[i][3] in d_lista:
+            if lista[i][4] == "in":
+                (d_lista[lista[i][3]]) += int(lista[i][5])
+            else:
+                (d_lista[lista[i][3]]) -= int(lista[i][5])
+        else:
+            if lista[i][4] == "in":
+                d_lista[lista[i][3]] = int(lista[i][5])
+            else: 
+                d_lista[lista[i][3]] = (int(lista[i][5])*-1)
+
+
+    most_profitable = 0
+    profit = 0
+
+    for j in d_lista:
+        if int(d_lista[j]) > profit:
+            most_profitable = int(j)
+            profit = d_lista[j]
+    return (most_profitable)
+
+print(which_year_max())
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]

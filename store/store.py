@@ -129,11 +129,17 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
 
 # the question: How many different kinds of game are available of each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [count] }
-def get_counts_by_manufacturers(table):
+def get_counts_by_manufacturers(table = data_manager.get_table_from_file("store/games.csv")):
 
-    # your code
+    d_list = {}
 
-    pass
+    for i in range(len(table)):
+        if table[i][2] in d_list:
+            d_list[table[i][2]] += 1
+        else:
+            d_list[table[i][2]] = 1
+        
+    return d_list
 
 
 # the question: What is the average amount of games in stock of a given manufacturer?
