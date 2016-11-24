@@ -61,6 +61,4 @@ def main():
         except KeyError as err:
             ui.print_error_message(err)
 
-
-if __name__ == '__main__':
-    main()
+main()

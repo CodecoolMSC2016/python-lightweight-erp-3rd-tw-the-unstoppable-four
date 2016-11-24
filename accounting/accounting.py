@@ -25,20 +25,41 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
+    menu_point = ["Show table", "Add", "Remove", "Update", "Highest profiting year", "Average profiting year"]
+    ui.print_menu("Accounting", menu_point, "Return to the main menu")
+    choose()
 
-    # you code
 
-    pass
+def choose():
+    inputs = ui.get_inputs(["Please enter a number: "], "Accounting")
+    option = inputs[0]
 
+    if option == "1":
+        show_table(table=data_manager.get_table_from_file("accounting/items.csv"))
+    elif option == "2":
+        add(data_manager.get_table_from_file("accounting/items.csv"))
+    elif option == "3":
+        my_id = ui.get_inputs("Enter the id of the line you want to delete: ", "")
+        remove(data_manager.get_table_from_file("accounting/items.csv"), my_id)
+    elif option == "4":
+        my_id = ui.get_inputs("Enter the id of the line you want to update: ", "")
+        update(data_manager.get_table_from_file("accounting/items.csv"), my_id)
+    elif option == "5":
+        which_year_max(data_manager.get_table_from_file("accounting/items.csv"))
+    elif option == "6":
+        year = ui.get_inputs("Enter the year you want to inspect: ", "")
+        avg_amount(data_manager.get_table_from_file("accounting/items.csv"), year)
+    elif option == "0":
+        pass
 
 # print the default table of records from the file
 #
 # @table: list of lists
+
+
 def show_table(table=data_manager.get_table_from_file("accounting/items.csv")):
     title_list = ["id", "month", "day", "year", "type", "amount"]
     return ui.print_table(table, title_list)
-
-show_table(table=data_manager.get_table_from_file("accounting/items.csv"))
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
@@ -60,7 +81,6 @@ def add(table):
 
     return table
 
-add(data_manager.get_table_from_file("accounting/items.csv"))
 
 # Remove the record having the id @id_ from the @list, than return @table
 #

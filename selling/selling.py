@@ -39,8 +39,6 @@ def show_table(table=data_manager.get_table_from_file("selling/sellings.csv")):
     title_list = ["id", "title", "price", "month", "day", "year"]
     return ui.print_table(table, title_list)
 
-show_table(table=data_manager.get_table_from_file("selling/sellings.csv"))
-
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
@@ -60,8 +58,6 @@ def add(table):
     data_manager.write_table_to_file("selling/sellings.csv", info)
 
     return table
-
-add(data_manager.get_table_from_file("selling/sellings.csv"))
 
 
 # Remove the record having the id @id_ from the @list, than return @table
