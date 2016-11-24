@@ -24,6 +24,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 CSV_NAME = "hr/persons.csv"
 
+
 def start_module():
     menu_point = ["Show table", "Add", "Remove", "Update", "Oldest person", "Closest person to average age"]
     ui.print_menu("\nHuman resources manager", menu_point, "Return to the main menu")
@@ -87,7 +88,7 @@ def add(table):
 #
 # @table: list of lists
 # @id_: string
-def remove(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
+def remove(table=data_manager.get_table_from_file(CSV_NAME), id_=None):
     counter = 0
     if id_ == None:
         id_ = ui.get_inputs("Enter id: ", "")
@@ -105,7 +106,7 @@ def remove(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
 #
 # @table: list of lists
 # @id_: string
-def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
+def update(table=data_manager.get_table_from_file(CSV_NAME), id_=None):
     counter = 0
     if id_ == None:
         id_ = ui.get_inputs("Enter id: ", "")
@@ -128,17 +129,38 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
 
 # the question: Who is the oldest person ?
 # return type: list of strings (name or names if there are two more with the same value)
-def get_oldest_person(table):
-
-    # your code
-
-    pass
+def get_oldest_person(table=data_manager.get_table_from_file(CSV_NAME)):
+    min = 2100
+    people = []
+    names = []
+    for year in table:
+        if int(year[2]) < min:
+            min = int(year[2])
+    for name in table:
+        if int(name[2]) == min:
+            people.append(name[1])
+    return people
 
 
 # the question: Who is the closest to the average age ?
 # return type: list of strings (name or names if there are two more with the same value)
-def get_persons_closest_to_average(table):
-
-    # your code
-
-    pass
+def get_persons_closest_to_average(table=data_manager.get_table_from_file(CSV_NAME)):
+    years = []
+    res = []
+    min = 100
+    people = []
+    for age in table:
+        years.append(int(age[2]))
+    avg = sum(years) / len(years)
+    avg = int(avg // 1)
+    for i in years:
+        res.append(abs(i - avg))
+    for num in res:
+        if num < min:
+            min = num
+    y = avg + min
+    x = avg - min
+    for names in table:
+        if int(names[2]) == int(y) or int(names[2]) == int(x):
+            people.append(names[1])
+    return people
