@@ -50,16 +50,9 @@ def choose():
         update(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "5":
         ui.print_result(get_lowest_price_item_id(data_manager.get_table_from_file(
-            CSV_NAME)), "Lowest price item: ")
+            CSV_NAME)), "Lowest price item")
     elif option == "6":
-        month_from = ui.get_inputs("Enter the year you want to inspect: ", "")
-        day_from = ui.get_inputs("Enter the year you want to inspect: ", "")
-        year_from = ui.get_inputs("Enter the year you want to inspect: ", "")
-        month_to = ui.get_inputs("Enter the year you want to inspect: ", "")
-        day_to = ui.get_inputs("Enter the year you want to inspect: ", "")
-        year_to = ui.get_inputs("Enter the year you want to inspect: ", "")
-        ui.print_result(get_items_sold_between(data_manager.get_table_from_file(
-            CSV_NAME), month_from[0], day_from[0], year_from[0], month_to[0], day_to[0], year_to[0]), "Item: ")
+        ui.print_table(get_items_sold_between(table = data_manager.get_table_from_file(CSV_NAME), month_from=None, day_from=None, year_from=None, month_to=None, day_to=None, year_to=None), ["id", "title", "price", "month", "day", "year"])
     elif option == "0":
         pass
 
@@ -194,7 +187,7 @@ def get_items_sold_between(table = data_manager.get_table_from_file(CSV_NAME), m
         dates.append(this_date)
 
     new_table = []
-
+        
     for j in range(len(table)):
         if int(dates[j]) > int(date_from) and int(dates[j]) < int(date_to):
             new_table.append(table[j])

@@ -48,10 +48,10 @@ def choose():
         update(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "5":
         ui.print_result(get_available_tools(data_manager.get_table_from_file(
-            CSV_NAME)), "Available tools: ")
+            CSV_NAME)), "Available tools")
     elif option == "6":
         ui.print_result(get_average_durability_by_manufacturers(data_manager.get_table_from_file(
-            CSV_NAME)), "Average durability time: ")
+            CSV_NAME)), "Average durability time")
     elif option == "0":
         pass
 

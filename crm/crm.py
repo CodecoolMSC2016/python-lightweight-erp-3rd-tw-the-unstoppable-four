@@ -47,10 +47,10 @@ def choose():
         update(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "5":
         ui.print_result(get_longest_name_id(data_manager.get_table_from_file(
-            CSV_NAME)), "Longest name: ")
+            CSV_NAME)), "Longest name")
     elif option == "6":
         ui.print_result(get_subscribed_emails(data_manager.get_table_from_file(
-            CSV_NAME)), "Subscribed emails: ")
+            CSV_NAME)), "Subscribed emails")
     elif option == "0":
         pass
 

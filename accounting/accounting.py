@@ -48,7 +48,7 @@ def choose():
         my_id = ui.get_inputs("Enter the id of the line you want to update: ", "")
         update(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "5":
-        ui.print_result(which_year_max(data_manager.get_table_from_file(CSV_NAME), "Highest profiting year: "))
+        ui.print_result(which_year_max(data_manager.get_table_from_file(CSV_NAME)), "Highest profiting year")
     elif option == "6":
         year = ui.get_inputs("Enter the year you want to inspect: ", "")
         ui.print_result(avg_amount(data_manager.get_table_from_file(
@@ -130,7 +130,7 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
 # return the answer (number)
 def which_year_max(table=data_manager.get_table_from_file("accounting/items.csv")):
 
-    lista = data_manager.get_table_from_file("accounting/items.csv")
+    lista = table
 
     d_lista = {}
 
@@ -155,8 +155,6 @@ def which_year_max(table=data_manager.get_table_from_file("accounting/items.csv"
             most_profitable = int(j)
             profit = d_lista[j]
     return (most_profitable)
-
-print(which_year_max())
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]

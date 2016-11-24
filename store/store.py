@@ -48,10 +48,10 @@ def choose():
         update(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "5":
         ui.print_result(get_counts_by_manufacturers(data_manager.get_table_from_file(
-            CSV_NAME)), "Games by manufacturer: ")
+            CSV_NAME)), "Games by manufacturer")
     elif option == "6":
         ui.print_result(get_average_by_manufacturer(data_manager.get_table_from_file(
-            CSV_NAME), manufacturer = None), "Average games in stock from manufacturer: ")
+            CSV_NAME), manufacturer = None), "Average games in stock from manufacturer")
     elif option == "0":
         pass
 
@@ -155,6 +155,6 @@ def get_average_by_manufacturer(table = data_manager.get_table_from_file(CSV_NAM
             sum_stock += int(table[counter][4])
         counter += 1
     return sum_stock / piece_stock
-print(get_average_by_manufacturer())
+
 
 #get_average_by_manufacturer()

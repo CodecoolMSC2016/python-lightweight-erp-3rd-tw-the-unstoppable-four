@@ -47,10 +47,10 @@ def choose():
         update(data_manager.get_table_from_file(CSV_NAME), my_id)
     elif option == "5":
         ui.print_result(get_oldest_person(data_manager.get_table_from_file(
-            CSV_NAME)), "Oldest person: ")
+            CSV_NAME)), "Oldest person")
     elif option == "6":
         ui.print_result(get_persons_closest_to_average(data_manager.get_table_from_file(
-            CSV_NAME)), "Name: ")
+            CSV_NAME)), "Name")
     elif option == "0":
         pass
 
