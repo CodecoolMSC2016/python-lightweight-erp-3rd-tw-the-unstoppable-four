@@ -58,6 +58,7 @@ def print_table(table, title_list):
 def print_result(result, label):
     print(label + ": ")
     print(result)
+    print("")
 
 
 # This function needs to generate outputs like this:

@@ -26,12 +26,12 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 #
 def start_module():
     menu_point = ["Show table", "Add", "Remove", "Update", "Highest profiting year", "Average profiting year"]
-    ui.print_menu("Accounting", menu_point, "Return to the main menu")
+    ui.print_menu("Accounting manager", menu_point, "Return to the main menu")
     choose()
 
 
 def choose():
-    inputs = ui.get_inputs(["Please enter a number: "], "Accounting")
+    inputs = ui.get_inputs(["Please enter a number: "], "Accounting manager")
     option = inputs[0]
 
     if option == "1":
@@ -48,7 +48,8 @@ def choose():
         which_year_max(data_manager.get_table_from_file("accounting/items.csv"))
     elif option == "6":
         year = ui.get_inputs("Enter the year you want to inspect: ", "")
-        avg_amount(data_manager.get_table_from_file("accounting/items.csv"), year)
+        ui.print_result(avg_amount(data_manager.get_table_from_file(
+            "accounting/items.csv"), year[0]), "Average profit of " + str(year[0]))
     elif option == "0":
         pass
 
@@ -122,7 +123,17 @@ def which_year_max(table):
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
 # return the answer (number)
 def avg_amount(table, year):
+    in_list = []
+    out_list = []
+    items = 0
+    for i in table:
+        if int(i[3]) == int(year):
+            items += 1
+            if str(i[4]) == "in":
+                in_list.append(int(i[5]))
+            elif str(i[4]) == "out":
+                out_list.append(int(i[5]))
 
-    # your code
-
-    pass
+    income = sum(in_list) - sum(out_list)
+    avg = income / items
+    return avg
