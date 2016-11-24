@@ -33,21 +33,33 @@ def start_module():
 # print the default table of records from the file
 #
 # @table: list of lists
-def show_table(table = data_manager.get_table_from_file("tool_manager/tools.csv")):
+def show_table(table=data_manager.get_table_from_file("tool_manager/tools.csv")):
     title_list = ["id", "name", "manufacturer", "purchase_date", "durability"]
     return ui.print_table(table, title_list)
 
-show_table(table = data_manager.get_table_from_file("tool_manager/tools.csv"))
+show_table(table=data_manager.get_table_from_file("tool_manager/tools.csv"))
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
 def add(table):
-
-    # your code
+    info = data_manager.get_table_from_file("tool_manager/tools.csv")
+    random = common.generate_random(info)
+    title_list = ["id", "name", "manufacturer", "purchase_date", "durability"]
+    counter = 1
+    newdata = []
+    newdata.append(random)
+    for i in range(1, len(info[0])):
+        inp = ui.get_inputs("Enter " + title_list[counter] + ": ", "")
+        newdata.append(inp[0])
+        counter += 1
+    info.append(newdata)
+    data_manager.write_table_to_file("tool_manager/tools.csv", info)
 
     return table
+
+add(data_manager.get_table_from_file("tool_manager/tools.csv"))
 
 
 # Remove the record having the id @id_ from the @list, than return @table
