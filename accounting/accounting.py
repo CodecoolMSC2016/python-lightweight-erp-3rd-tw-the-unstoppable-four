@@ -48,7 +48,7 @@ def choose():
         my_id = ui.get_inputs("Enter the id of the line you want to update: ", "")
         update(data_manager.get_table_from_file("accounting/items.csv"), my_id)
     elif option == "5":
-        which_year_max(data_manager.get_table_from_file("accounting/items.csv"))
+        ui.print_result(which_year_max(data_manager.get_table_from_file("accounting/items.csv"), "Highest profiting year: "))
     elif option == "6":
         year = ui.get_inputs("Enter the year you want to inspect: ", "")
         ui.print_result(avg_amount(data_manager.get_table_from_file(
@@ -56,11 +56,10 @@ def choose():
     elif option == "0":
         pass
 
+
 # print the default table of records from the file
 #
 # @table: list of lists
-
-
 def show_table(table=data_manager.get_table_from_file("accounting/items.csv")):
     title_list = ["id", "month", "day", "year", "type", "amount"]
     return ui.print_table(table, title_list)
@@ -82,7 +81,6 @@ def add(table):
         counter += 1
     info.append(newdata)
     data_manager.write_table_to_file("accounting/items.csv", info)
-
     return table
 
 
@@ -90,7 +88,6 @@ def add(table):
 #
 # @table: list of lists
 # @id_: string
-<<<<<<< HEAD
 def remove(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
     counter = 0
     if id_ == None:
@@ -101,17 +98,6 @@ def remove(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
         counter += 1
     del table[counter]
     data_manager.write_table_to_file(CSV_NAME, table)
-=======
-
-
-def remove(table, id_):
-
-    # your code
-
->>>>>>> d31267cd2bd2b6d31153410205d72cfef45c25e6
-    return table
-
-#remove()
 
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -135,8 +121,6 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
         new_counter += 1
     data_manager.write_table_to_file(CSV_NAME, table)
     return table
-
-#update()
 
 
 # special functions:

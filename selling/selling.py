@@ -29,10 +29,39 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 CSV_NAME = "selling/sellings.csv"
 
 def start_module():
+    menu_point = ["Show table", "Add", "Remove", "Update", "Lowest price", "Items sold between a period"]
+    ui.print_menu("Selling manager", menu_point, "Return to the main menu")
+    choose()
 
-    # you code
 
-    pass
+def choose():
+    inputs = ui.get_inputs(["Please enter a number: "], "Selling manager")
+    option = inputs[0]
+
+    if option == "1":
+        show_table(table=data_manager.get_table_from_file("CSV_NAME"))
+    elif option == "2":
+        add(data_manager.get_table_from_file("CSV_NAME"))
+    elif option == "3":
+        my_id = ui.get_inputs("Enter the id of the line you want to delete: ", "")
+        remove(data_manager.get_table_from_file("CSV_NAME"), my_id)
+    elif option == "4":
+        my_id = ui.get_inputs("Enter the id of the line you want to update: ", "")
+        update(data_manager.get_table_from_file("CSV_NAME"), my_id)
+    elif option == "5":
+        ui.print_result(get_lowest_price_item_id(data_manager.get_table_from_file(
+            "CSV_NAME")), "Lowest price item: ")
+    elif option == "6":
+        month_from = ui.get_inputs("Enter the year you want to inspect: ", "")
+        day_from = ui.get_inputs("Enter the year you want to inspect: ", "")
+        year_from = ui.get_inputs("Enter the year you want to inspect: ", "")
+        month_to = ui.get_inputs("Enter the year you want to inspect: ", "")
+        day_to = ui.get_inputs("Enter the year you want to inspect: ", "")
+        year_to = ui.get_inputs("Enter the year you want to inspect: ", "")
+        ui.print_result(get_items_sold_between(data_manager.get_table_from_file(
+            "CSV_NAME"), month_from[0], day_from[0], year_from[0], month_to[0], day_to[0], year_to[0]), "Item: ")
+    elif option == "0":
+        pass
 
 
 # print the default table of records from the file
@@ -59,7 +88,6 @@ def add(table):
         counter += 1
     info.append(newdata)
     data_manager.write_table_to_file("selling/sellings.csv", info)
-
     return table
 
 
@@ -78,8 +106,6 @@ def remove(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
     del table[counter]
     data_manager.write_table_to_file(CSV_NAME, table)
     return table
-
-#remove()
 
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -103,7 +129,6 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
         new_counter += 1
     data_manager.write_table_to_file(CSV_NAME, table)
     return table
-#update()
 
 
 # special functions:

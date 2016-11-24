@@ -27,10 +27,34 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 CSV_NAME = "store/games.csv"
 
 def start_module():
+    menu_point = ["Show table", "Add", "Remove", "Update", "Games by manufacturer", "Average games in stock from manufacturer"]
+    ui.print_menu("Store manager", menu_point, "Return to the main menu")
+    choose()
 
-    # you code
 
-    pass
+def choose():
+    inputs = ui.get_inputs(["Please enter a number: "], "Store manager")
+    option = inputs[0]
+
+    if option == "1":
+        show_table(table=data_manager.get_table_from_file("CSV_NAME"))
+    elif option == "2":
+        add(data_manager.get_table_from_file("CSV_NAME"))
+    elif option == "3":
+        my_id = ui.get_inputs("Enter the id of the line you want to delete: ", "")
+        remove(data_manager.get_table_from_file("CSV_NAME"), my_id)
+    elif option == "4":
+        my_id = ui.get_inputs("Enter the id of the line you want to update: ", "")
+        update(data_manager.get_table_from_file("CSV_NAME"), my_id)
+    elif option == "5":
+        ui.print_result(get_counts_by_manufacturers(data_manager.get_table_from_file(
+            "CSV_NAME")), "Games by manufacturer: ")
+    elif option == "6":
+        manufacturer = ui.get_inputs("Enter the manufacturer: ", "")
+        ui.print_result(get_average_by_manufacturer(data_manager.get_table_from_file(
+            "CSV_NAME"), manufacturer[0]), "Average games in stock from manufacturer: ")
+    elif option == "0":
+        pass
 
 
 # print the default table of records from the file
@@ -57,7 +81,6 @@ def add(table):
         counter += 1
     info.append(newdata)
     data_manager.write_table_to_file("store/games.csv", info)
-
     return table
 
 
@@ -76,8 +99,6 @@ def remove(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
     del table[counter]
     data_manager.write_table_to_file(CSV_NAME, table)
     return table
-
-#remove()
 
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -101,7 +122,6 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
         new_counter += 1
     data_manager.write_table_to_file(CSV_NAME, table)
     return table
-#update()
 
 
 # special functions:

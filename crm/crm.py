@@ -26,10 +26,33 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 CSV_NAME = "crm/customers.csv"
 
 def start_module():
+    menu_point = ["Show table", "Add", "Remove", "Update", "Longest customer name", "Subscribed emails"]
+    ui.print_menu("Customer Relationship Management (CRM)", menu_point, "Return to the main menu")
+    choose()
 
-    # you code
 
-    pass
+def choose():
+    inputs = ui.get_inputs(["Please enter a number: "], "Customer Relationship Management (CRM)")
+    option = inputs[0]
+
+    if option == "1":
+        show_table(table=data_manager.get_table_from_file("CSV_NAME"))
+    elif option == "2":
+        add(data_manager.get_table_from_file("CSV_NAME"))
+    elif option == "3":
+        my_id = ui.get_inputs("Enter the id of the line you want to delete: ", "")
+        remove(data_manager.get_table_from_file("CSV_NAME"), my_id)
+    elif option == "4":
+        my_id = ui.get_inputs("Enter the id of the line you want to update: ", "")
+        update(data_manager.get_table_from_file("CSV_NAME"), my_id)
+    elif option == "5":
+        ui.print_result(get_longest_name_id(data_manager.get_table_from_file(
+            "CSV_NAME")), "Longest name: ")
+    elif option == "6":
+        ui.print_result(get_subscribed_emails(data_manager.get_table_from_file(
+            "CSV_NAME")), "Subscribed emails: ")
+    elif option == "0":
+        pass
 
 
 # print the default table of records from the file
@@ -56,7 +79,6 @@ def add(table):
         counter += 1
     info.append(newdata)
     data_manager.write_table_to_file("crm/customers.csv", info)
-
     return table
 
 
@@ -75,8 +97,6 @@ def remove(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
     del table[counter]
     data_manager.write_table_to_file(CSV_NAME, table)
     return table
-
-#remove()
 
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -100,8 +120,6 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
         new_counter += 1
     data_manager.write_table_to_file(CSV_NAME, table)
     return table
-
-#update()
 
 
 # special functions:
