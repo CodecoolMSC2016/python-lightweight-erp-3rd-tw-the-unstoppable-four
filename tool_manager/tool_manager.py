@@ -130,19 +130,48 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
 # return type: list of lists (the inner list contains the whole row with their actual data types)
 #
 # @table: list of lists
-def get_available_tools(table):
-
-    # your code
-
-    pass
+def get_available_tools(table=data_manager.get_table_from_file(CSV_NAME)):
+    new_list = []
+    this_year = 2016
+    title_list = ["id", "name", "manufacturer", "purchase_date", "durability"]
+    for i in range(len(table)):
+        if this_year - int(table[i][3]) < int(table[i][4]):
+            new_list.append(table[i])
+    return new_list
 
 
 # the question: What are the average durability time for each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }
 #
 # @table: list of lists
-def get_average_durability_by_manufacturers(table):
+def get_average_durability_by_manufacturers(table=data_manager.get_table_from_file(CSV_NAME)):
 
-    # your code
+    dura_dict = {}
+    company_names = []
+    data_list = []
+    for i in range(len(table)):
+        if table[i][2] not in company_names:
+            company_names.append(table[i][2])
 
-    pass
+    for j in range(len(company_names)):
+        data = []
+        data.append(company_names[j])
+        data.append(0)
+        data.append(0)
+        data_list.append(data)
+
+    for k in range(len(table)):
+        if table[k][2] == data_list[0][0]:
+            data_list[0][1] += int(table[k][4])
+            data_list[0][2] += 1
+        elif table[k][2] == data_list[1][0]:
+            data_list[1][1] += int(table[k][4])
+            data_list[1][2] += 1
+        elif table[k][2] == data_list[2][0]:
+            data_list[2][1] += int(table[k][4])
+            data_list[2][2] += 1
+
+    for m in range(len(data_list)):
+        dura_dict[company_names[m]] = data_list[m][1] / data_list[m][2]
+
+    return dura_dict

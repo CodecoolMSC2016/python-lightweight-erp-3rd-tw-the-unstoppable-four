@@ -146,8 +146,49 @@ def get_lowest_price_item_id(table):
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
-def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
+def get_items_sold_between(table = data_manager.get_table_from_file(CSV_NAME), month_from=None, day_from=None, year_from=None, month_to=None, day_to=None, year_to=None):
+    date_from = ""
+    date_to = ""
+    if year_from == None:
+        year_from = ui.get_inputs("Enter year_from: ", "")
+        date_from += year_from[0]
+    if month_from == None:
+        month_from = ui.get_inputs("Enter month_from: ", "")
+        date_from += month_from[0]
+    if day_from == None:
+        day_from = ui.get_inputs("Enter day_from: ", "")
+        date_from += day_from[0]
+    if year_to == None:
+        year_to = ui.get_inputs("Enter year_to: ", "")
+        date_to += year_to[0]
+    if month_to == None:
+        month_to = ui.get_inputs("Enter month_to: ", "")
+        date_to += month_to[0]
+    if day_to == None:
+        day_to = ui.get_inputs("Enter day_to: ", "")
+        date_to += day_to[0]
 
-    # your code
+    dates = []
+    for i in range(len(table)):
+        this_date = ""
+        this_date += table[i][5]
+        if len(table[i][3]) == 1:
+            this_date += "0"
+            this_date += table[i][3]
+        else:
+            this_date += table[i][3]
+        if len(table[i][4]) == 1:
+            this_date += "0"
+            this_date += table[i][4]
+        else:
+            this_date += table[i][4]
+        dates.append(this_date)
 
-    pass
+    new_table = []
+
+    for j in range(len(table)):
+        if int(dates[j]) > int(date_from) and int(dates[j]) < int(date_to):
+            new_table.append(table[j])
+
+    return new_table
+
