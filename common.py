@@ -10,10 +10,12 @@ import random
 #
 # @table: list of list
 # @generated: string - generated random string (unique in the @table)
+
+
 def generate_random(table):
 
     spec_char = ("!", "\"", "#", "$", "%", "&", "\'", "(", ")", "*",
-                "+", ",", "-", ".", "/", ":", "<", ">", "=", "?")
+                 "+", ",", "-", ".", "/", ":", "<", ">", "=", "?")
 
     id = []
 

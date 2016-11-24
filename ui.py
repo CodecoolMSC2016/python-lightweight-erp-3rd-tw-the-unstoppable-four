@@ -31,10 +31,10 @@ def print_table(table, title_list):
             if len(this_string) != length_list[s]:
                 difference = length_list[s] - len(extended_table[r][s])
                 if difference % 2 == 1:
-                    this_string = " "*int(difference/2) + this_string + " "*int(difference/2 + 1)
+                    this_string = " " * int(difference / 2) + this_string + " " * int(difference / 2 + 1)
                     new_list[r].append(this_string)
                 else:
-                    this_string = " "*int(difference/2) + this_string + " "*int(difference/2)
+                    this_string = " " * int(difference / 2) + this_string + " " * int(difference / 2)
                     new_list[r].append(this_string)
             else:
                 new_list[r].append(this_string)
@@ -42,13 +42,13 @@ def print_table(table, title_list):
     total = 0
     for i in length_list:
         total += i
-    total += len(extended_table[0])*4
-    print("/" + (total-2) * "-" + "\\")
+    total += len(extended_table[0]) * 4
+    print("/" + (total - 2) * "-" + "\\")
     for i in range(len(new_list)):
         print(lenght_of_titles.format(*new_list[i]))
-        if i < len(new_list)-1:
+        if i < len(new_list) - 1:
             print(total * "-")
-    print("\\" + (total-2) * "-" + "/")
+    print("\\" + (total - 2) * "-" + "/")
 
 
 # This function needs to print result of the special functions
@@ -58,6 +58,7 @@ def print_table(table, title_list):
 def print_result(result, label):
     print(label + ": ")
     print(result)
+    print("")
 
 
 # This function needs to generate outputs like this:
@@ -91,8 +92,7 @@ def get_inputs(list_labels, title):
     inputs = []
     print(title)
     key = input((list_labels))
-    for element in key:
-        inputs.append(element)
+    inputs.append(key)
 
     return inputs
 
@@ -101,4 +101,4 @@ def get_inputs(list_labels, title):
 #
 # @message: string - the error message
 def print_error_message(message):
-    print("A(n) " + message + "has occured!")
+    print(message)
