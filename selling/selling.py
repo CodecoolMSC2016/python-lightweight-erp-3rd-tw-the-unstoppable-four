@@ -137,11 +137,20 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
 # the question: What is the id of the item that sold for the lowest price ?
 # return type: string (id)
 # if there are more than one with the lowest price, return the first of descending alphabetical order
-def get_lowest_price_item_id(table):
-
-    # your code
-
-    pass
+def get_lowest_price_item_id(table = data_manager.get_table_from_file(CSV_NAME)):
+    counter = 0
+    lowest_price = 500
+    for i in table:
+        if int(table[counter][2]) <= lowest_price:
+            lowest_price = int(table[counter][2])
+        counter += 1
+    new_counter = 0
+    lowest_price_index = []
+    for i in table:
+        if lowest_price == int(table[new_counter][2]):
+            lowest_price_index.append(table[new_counter][0])
+        new_counter += 1
+    return lowest_price_index[0]
 
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)

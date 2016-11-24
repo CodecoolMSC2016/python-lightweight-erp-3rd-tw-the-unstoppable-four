@@ -57,7 +57,7 @@ def choose():
 # print the default table of records from the file
 #
 # @table: list of lists
-def show_table(table=data_manager.get_table_from_file("hr/persons.csv")):
+def show_table(table=data_manager.get_table_from_file(CSV_NAME)):
     title_list = ["id", "name", "birth_date"]
     return ui.print_table(table, title_list)
 
@@ -68,7 +68,7 @@ def show_table(table=data_manager.get_table_from_file("hr/persons.csv")):
 
 
 def add(table):
-    info = data_manager.get_table_from_file("hr/persons.csv")
+    info = data_manager.get_table_from_file(CSV_NAME)
     random = common.generate_random(info)
     title_list = ["id", "name", "birth_date"]
     counter = 1
@@ -79,7 +79,7 @@ def add(table):
         newdata.append(inp[0])
         counter += 1
     info.append(newdata)
-    data_manager.write_table_to_file("hr/persons.csv", info)
+    data_manager.write_table_to_file(CSV_NAME, info)
     return table
 
 

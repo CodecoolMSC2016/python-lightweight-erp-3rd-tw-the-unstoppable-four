@@ -128,17 +128,38 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
 
 # the question: What is the id of the customer with the longest name ?
 # return type: string (id) - if there are more than one longest name, return the first of descending alphabetical order
-def get_longest_name_id(table):
-
-    # your code
-
-    pass
+def get_longest_name_id(table= data_manager.get_table_from_file(CSV_NAME)):
+    longest_names = []
+    longest_name = ""
+    counter = 0
+    for i in table:
+        if len(table[counter][1]) >= len(longest_name):
+            longest_name = table[counter][1]
+            longest_names.append(table[counter][1])
+        counter += 1
+    new_counter = 0
+    lowest_unicode = 500
+    lowest_index = 0
+    for i in longest_names:
+        if ord(longest_names[new_counter][0]) < lowest_unicode:
+            lowest_unicode = ord(longest_names[new_counter][0])
+            lowest_index = new_counter
+        new_counter += 1
+    final_index = 0
+    final_counter = 0
+    for i in table:
+        if table[final_counter][1] == longest_names[lowest_index]:
+            return table[final_counter][0]
+        final_counter += 1
 
 
 # the question: Which customers has subscribed to the newsletter?
 # return type: list of string (where string is like email+separator+name, separator=";")
-def get_subscribed_emails(table):
-
-    # your code
-
-    pass
+def get_subscribed_emails(table= data_manager.get_table_from_file(CSV_NAME)):
+    counter = 0
+    subscribed_customer = []
+    for i in table:
+        if table[counter][3] == "1":
+            subscribed_customer.append(table[counter][2] + ";" + table[counter][1])
+        counter += 1
+    return subscribed_customer
