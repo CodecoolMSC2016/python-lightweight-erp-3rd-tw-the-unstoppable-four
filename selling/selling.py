@@ -202,9 +202,6 @@ def get_items_sold_between(table = data_manager.get_table_from_file(CSV_NAME), m
     
     
     for j in range(len(table)):
-        print(dates[j])
-        print(date_from)
-        print(date_to)
         if int(dates[j]) > int(date_from) and int(dates[j]) < int(date_to):
             new_table.append(table[j])
 
