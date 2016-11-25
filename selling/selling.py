@@ -52,7 +52,7 @@ def choose():
         ui.print_result(get_lowest_price_item_id(data_manager.get_table_from_file(
             CSV_NAME)), "Lowest price item")
     elif option == "6":
-        ui.print_table(get_items_sold_between(table = data_manager.get_table_from_file(CSV_NAME), month_from=None, day_from=None, year_from=None, month_to=None, day_to=None, year_to=None), ["id", "title", "price", "month", "day", "year"])
+        ui.print_table(get_items_sold_between(), ["id", "title", "price", "month", "day", "year"])
     elif option == "0":
         pass
 
@@ -156,19 +156,31 @@ def get_items_sold_between(table = data_manager.get_table_from_file(CSV_NAME), m
         date_from += year_from[0]
     if month_from == None:
         month_from = ui.get_inputs("Enter month_from: ", "")
-        date_from += month_from[0]
+        if len(month_from[0]) == 1:
+            date_from = date_from + "0" + month_from[0]
+        else:
+            date_from = date_from + month_from[0]
     if day_from == None:
         day_from = ui.get_inputs("Enter day_from: ", "")
-        date_from += day_from[0]
+        if len(day_from[0]) == 1:
+            date_from = date_from + "0" + day_from[0]
+        else:
+            date_from = date_from + day_from[0]
     if year_to == None:
         year_to = ui.get_inputs("Enter year_to: ", "")
         date_to += year_to[0]
     if month_to == None:
         month_to = ui.get_inputs("Enter month_to: ", "")
-        date_to += month_to[0]
+        if len(month_to[0]) == 1:
+            date_to = date_to + "0" + month_to[0]
+        else:
+            date_to = date_to + month_to[0]
     if day_to == None:
         day_to = ui.get_inputs("Enter day_to: ", "")
-        date_to += day_to[0]
+        if len(day_to[0]) == 1:
+            date_to = date_to + "0" + day_to[0]
+        else:
+            date_to = date_to + day_to[0]
 
     dates = []
     for i in range(len(table)):
@@ -187,10 +199,13 @@ def get_items_sold_between(table = data_manager.get_table_from_file(CSV_NAME), m
         dates.append(this_date)
 
     new_table = []
-        
+    
+    
     for j in range(len(table)):
+        print(dates[j])
+        print(date_from)
+        print(date_to)
         if int(dates[j]) > int(date_from) and int(dates[j]) < int(date_to):
             new_table.append(table[j])
 
     return new_table
-

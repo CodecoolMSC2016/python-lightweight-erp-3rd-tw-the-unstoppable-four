@@ -170,7 +170,12 @@ def avg_amount(table, year):
                 in_list.append(int(i[5]))
             elif str(i[4]) == "out":
                 out_list.append(int(i[5]))
-
-    income = sum(in_list) - sum(out_list)
+    in_list_sum = 0
+    out_list_sum = 0
+    for i in in_list:
+        in_list_sum += i
+    for i in out_list:
+        out_list_sum += i
+    income = in_list_sum - out_list_sum
     avg = income / items
     return avg

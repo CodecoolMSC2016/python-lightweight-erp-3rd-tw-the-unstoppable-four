@@ -133,10 +133,16 @@ def update(table = data_manager.get_table_from_file(CSV_NAME), id_ = None):
 def get_available_tools(table=data_manager.get_table_from_file(CSV_NAME)):
     new_list = []
     this_year = 2016
-    title_list = ["id", "name", "manufacturer", "purchase_date", "durability"]
+    #title_list = ["id", "name", "manufacturer", "purchase_date", "durability"]
     for i in range(len(table)):
         if this_year - int(table[i][3]) < int(table[i][4]):
             new_list.append(table[i])
+    for i in range(len(new_list)):
+        for j in range(len(new_list[i])):
+            try:
+                new_list[i][j] = int(new_list[i][j])
+            except:
+                pass
     return new_list
 
 

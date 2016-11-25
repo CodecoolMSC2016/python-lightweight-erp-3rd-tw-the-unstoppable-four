@@ -151,7 +151,10 @@ def get_persons_closest_to_average(table=data_manager.get_table_from_file(CSV_NA
     people = []
     for age in table:
         years.append(int(age[2]))
-    avg = sum(years) / len(years)
+    years_sum = 0
+    for i in years:
+        years_sum += i
+    avg = years_sum / len(years)
     avg = int(avg // 1)
     for i in years:
         res.append(abs(i - avg))
